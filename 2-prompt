@@ -1,0 +1,79 @@
+# vim: syntax=sh
+
+BLUE="\033[34m"
+RESET="\033[00m"
+
+TC_BLUE=$(print -e $BLUE)
+TC_RESET=$(print -e $RESET)
+
+# Display a welcoming message upon user login.
+# Will show the current phase of the moon and
+# logged in users if running from an active
+# SSH session.
+if [[ -n $SSH_TTY ]]; then
+  print -e "Welcome back, $BLUE$USER$RESET\n"
+  [[ $(command -v phoon) ]] && phoon -l 7; print
+  w; print
+else
+  [[ $(command -v phoon) ]] && phoon -l 7; print
+fi
+
+clean_pwd () {
+  # On various *BSD and UNIX-like systems /home
+  # is often a symbolic link to /usr/home.  Check
+  # whether that is the case, and echo the tidle
+  # accordingly.
+  h=$HOME
+  [[ -h /home ]] && h=/usr$HOME
+  if [[ $PWD = $HOME ]] || \
+    [[ $PWD = $h ]]; then print '~';
+  else
+    print $PWD | awk -F/ '{print $NF}'
+  fi
+}
+
+ssh_symb () { [[ -n $SSH_TTY ]] && print -n "* "; }
+
+git_info () {
+  command -v git >/dev/null 2>&1 || return
+  branch=$(git branch --show-current 2>/dev/null)
+  if [[ -n $branch ]]; then
+    changes=$(git status --porcelain 2>/dev/null|awk '{print $1}'|sort -u)
+    if [[ -n $changes ]]; then
+      bits=""
+      # Do not expand file name patterns.  This is important
+      # because untracked files are marked as '??', so disable
+      # file-globbing until we are finished parsing any status
+      # changes in the git repository.
+      set -f
+      for p in $changes; do
+        case $p in
+          A) bits+='+' ;;
+          D) bits+='-' ;;
+          # Annoying hack.  In ksh93 '!' is a reserved keyword
+          # for the process id or pool name and job number of
+          # the last background command.  This can be escaped
+          # by prepending another '!'.
+          M) case $KSH_VERSION in
+              (*MIRBSD*) bits+='!' ;;
+              (*) bits+='!!' ;;
+             esac ;;
+          R) bits+='>' ;;
+          \?\?) bits+='?' ;;
+        esac
+      done
+      set +f
+      [[ -n $bits ]] && print -n "<$bits> "
+    fi
+    sha=$(git rev-parse --short=5 HEAD 2>/dev/null)
+    # Enable UTF-8 character for the separator when using
+    # the MirBSD (mksh) shell that is otherwise unsupported
+    # in ksh93 and friends.
+    [[ $KSH_VERSION = *MIRBSD* ]] && sep="\u00B7" || sep="-"
+    print -e "<$BLUE$branch$RESET$sep$sha> "
+  fi
+}
+
+export PS1="\$(ssh_symb)$TC_BLUE\$(hostname -s)$TC_RESET:\$(clean_pwd) \$(git_info)\$(print -e '\n%') "
+
+unset TC_BLUE TC_RESET

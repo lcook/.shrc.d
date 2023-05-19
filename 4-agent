@@ -1,0 +1,21 @@
+# vim: syntax=sh
+
+start_ssh_agent () {
+  # Determine whether we are inside of an
+  # interactive shell and that ssh-agent
+  # is actually installed on the host.
+  if [[ $(command -v ssh-agent) ]] && \
+      [[ $- = *i* ]]; then
+    auth_socket=~/.ssh/ssh-agent-info
+    # If ssh-agent appears to be an already
+    # running process, point towards our auth
+    # socket; instead, start up a new agent.
+    if [[ -n $(pgrep ssh-agent) ]]; then
+      export SSH_AUTH_SOCK=$auth_socket
+    else
+      [[ -S $auth_socket ]] && rm -f $auth_socket
+      eval $(ssh-agent -a $auth_socket) >/dev/null 2>&1
+    fi
+  fi
+}; start_ssh_agent
+unset -f start_ssh_agent

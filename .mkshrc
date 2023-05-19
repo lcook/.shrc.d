@@ -1,0 +1,5 @@
+# vim: syntax=sh
+
+for p in ~/.shrc.d/[0-9]-*; do
+  [[ -f $p ]] && source $p; done
+unset p

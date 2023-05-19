@@ -1,0 +1,10 @@
+# vim: syntax=sh
+
+if [[ $KSH_VERSION == *MIRBSD* ]]; then
+  alias -d \
+    dev=~/dev/git                 \
+    ports=~/dev/git/freebsd/ports \
+    doc=~/dev/git/freebsd/ports   \
+    src=~/dev/git/freebsd/src     \
+    pad=/scratch
+fi

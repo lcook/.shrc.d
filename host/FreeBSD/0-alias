@@ -1,0 +1,16 @@
+# vim: syntax=sh
+
+if [[ $(command -v pkg) ]]; then
+  alias \
+    pkga="pkg query -e %a=0 %o"           \
+    pkgi="pkg info"                       \
+    pkgl="pkg info -l"                    \
+    pkglr="pkg info -R --raw-format=yaml" \
+    pkgup="pkg update"                    \
+    pkgupgr="pkg upgrade"
+
+  if [[ $(command -v fzf) ]]; then
+    alias \
+      fzfpkgdel="pkga | sort | fzf -m --reverse --info=inline --header='Select packages for removal' | xargs doas pkg delete -y"
+  fi
+fi

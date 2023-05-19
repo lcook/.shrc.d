@@ -1,0 +1,32 @@
+# vim: syntax=sh
+
+alias \
+  ls="ls -h --color=auto"    \
+  ll="ls -l"                 \
+  la="ls -A"                 \
+  lm="la --color=none |more"
+
+alias \
+  grep="grep --color=auto"
+
+if [[ $(command -v git) ]]; then
+  alias \
+    gbr="git branch"          \
+    gca="git gc --aggressive" \
+    gcl="git clone"           \
+    gclr="git clean -fdx"     \
+    gcm="git commit"          \
+    gco="git checkout"        \
+    gdf="git diff"            \
+    gpr="git pull --ff-only"  \
+    gpu="git push"            \
+    grb="git rebase"          \
+    grbi="git rebase -i"      \
+    grf="git reflog show"     \
+    gst="git status"          \
+    gsw="git switch"
+fi
+
+if [[ $KSH_VERSION = *MIRBSD* ]]; then
+    alias -d shd=~/.shrc.d/
+fi

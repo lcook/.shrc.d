@@ -1,0 +1,12 @@
+# vim: syntax=sh
+
+# Load operating-system specific
+# configuration files.
+load_host_rc () {
+  rcdir=~/.shrc.d/host/$(uname -s)
+  if [ -d $rcdir ]; then
+    for p in $rcdir/*; do
+      [[ -f $p ]] && source $p; done
+  fi
+}; load_host_rc
+unset -f load_host_rc

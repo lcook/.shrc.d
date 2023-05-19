@@ -1,0 +1,13 @@
+# vim: syntax=sh
+
+source ~/.shrc.d/.envrc
+export HISTFILE=~/.shrc.d/.history
+export HISTSIZE=20000
+export TERM=xterm-256color
+
+# Enable UTF-8 support for the MirBSD
+# shell (mksh), not supported in ksh93.
+if [[ $KSH_VERSION = *MIRBSD* ]]; then
+  set -o utf8-mode
+fi
+set -o emacs
