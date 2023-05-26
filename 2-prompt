@@ -1,4 +1,4 @@
-# vim: syntax=sh
+# vim: syntax=sh expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 BLUE="\033[34m"
 RESET="\033[00m"

@@ -1,4 +1,4 @@
-# vim: syntax=sh
+# vim: syntax=sh expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 alias \
   ls="ls -h --color=auto"    \
