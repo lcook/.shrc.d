@@ -18,7 +18,8 @@ else
   [[ $(command -v phoon) ]] && phoon -l 7; print
 fi
 
-clean_pwd () {
+clean_pwd ()
+{
   # On various *BSD and UNIX-like systems /home
   # is often a symbolic link to /usr/home.  Check
   # whether that is the case, and echo the tidle
@@ -32,9 +33,13 @@ clean_pwd () {
   fi
 }
 
-ssh_symb () { [[ -n $SSH_TTY ]] && print -n "* "; }
+ssh_symb ()
+{
+  [[ -n $SSH_TTY ]] && print -n "* "
+}
 
-git_info () {
+git_info ()
+{
   command -v git >/dev/null 2>&1 || return
   branch=$(git branch --show-current 2>/dev/null)
   if [[ -n $branch ]]; then

@@ -1,6 +1,7 @@
 # vim: syntax=sh expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
-start_ssh_agent () {
+start_ssh_agent ()
+{
   # Determine whether we are inside of an
   # interactive shell and that ssh-agent
   # is actually installed on the host.
