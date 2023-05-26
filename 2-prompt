@@ -1,3 +1,4 @@
+# shellcheck shell=ksh disable=SC2086
 # vim: syntax=sh expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 BLUE="\033[34m"
@@ -26,8 +27,8 @@ clean_pwd ()
   # accordingly.
   h=$HOME
   [[ -h /home ]] && h=/usr$HOME
-  if [[ $PWD = $HOME ]] || \
-    [[ $PWD = $h ]]; then print '~';
+  if [[ $PWD = "$HOME" ]] || \
+    [[ $PWD = "$h" ]]; then print '~';
   else
     print $PWD | awk -F/ '{print $NF}'
   fi

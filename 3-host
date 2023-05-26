@@ -1,3 +1,4 @@
+# shellcheck shell=ksh disable=SC1090,SC2086,SC2231
 # vim: syntax=sh expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 # Load operating-system specific
