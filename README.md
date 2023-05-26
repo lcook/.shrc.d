@@ -13,9 +13,8 @@ checking the value of `$KSH_VERSION`—no guarantee
 is made outside of this.
 
 Local modifications, as indicated by a `.local`
-suffix are intended for adhoc/personal environments/
-hosts, that may not be the default options on other
-systems.
+suffix are intended for personal environments, that
+may not be the default options on other systems.
 
 For setting defaults based on the type of underlying
 operating-system, place files in host/`$(uname -s)`/,
@@ -86,3 +85,7 @@ $ wget -q -O- $url | tar xfv - -C ~
 This is entirely for personal usage and does not
 include any `.local` files for less baggage. Not
 generally recommended.
+
+## License
+
+[BSD 2-Clause](LICENSE)
