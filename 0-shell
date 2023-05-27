@@ -12,3 +12,16 @@ if [[ $KSH_VERSION = *MIRBSD* ]]; then
   set -o utf8-mode
 fi
 set -o emacs
+
+for p in ~/bin ~/.local/bin ~/.local/script; do
+  if [[ ! -d $p ]]; then
+    continue
+  fi
+  # Avoid duplicated entries in our $PATH.  An example
+  # could be starting a sub-shell that may inherit our
+  # enviroment variables and subsequently $PATH.
+  if [[ $PATHSEP$PATH$PATHSEP = *"$PATHSEP$p$PATHSEP"* ]]; then
+    continue
+  fi
+  PATH=$p$PATHSEP$PATH
+done
