@@ -36,7 +36,9 @@ clean_pwd ()
 
 ssh_symb ()
 {
-  [[ -n $SSH_TTY ]] && print -n "* "
+  if [[ -n $SSH_TTY ]]; then
+    print -n "* "
+  fi
 }
 
 git_info ()
@@ -44,7 +46,7 @@ git_info ()
   command -v git >/dev/null 2>&1 || return
   branch=$(git branch --show-current 2>/dev/null)
   if [[ -n $branch ]]; then
-    changes=$(git status --porcelain 2>/dev/null|awk '{print $1}'|sort -u)
+    changes=$(git status --porcelain 2>/dev/null | awk '{print $1}' | sort -u)
     if [[ -n $changes ]]; then
       bits=""
       # Do not expand file name patterns.  This is important
