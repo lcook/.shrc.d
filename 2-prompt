@@ -84,4 +84,4 @@ git_info ()
 
 export PS1="\$(ssh_symb)$TC_BLUE\$(hostname -s)$TC_RESET:\$(clean_pwd) \$(git_info)\$(print -e '\n%') "
 
-unset TC_BLUE TC_RESET
+unset BLUE RESET TC_BLUE TC_RESET

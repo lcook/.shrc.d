@@ -10,5 +10,6 @@ load_host_rc ()
     for p in $rcdir/*; do
       [[ -f $p ]] && source $p; done
   fi
+  unset rcdir
 }; load_host_rc
 unset -f load_host_rc

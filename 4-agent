@@ -18,6 +18,7 @@ start_ssh_agent ()
       [[ -S $auth_socket ]] && rm -f $auth_socket
       eval $(ssh-agent -a $auth_socket) >/dev/null 2>&1
     fi
+    unset auth_socket
   fi
 }; start_ssh_agent
 unset -f start_ssh_agent
