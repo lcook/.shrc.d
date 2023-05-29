@@ -1,4 +1,5 @@
-# vim: syntax=sh
+# shellcheck shell=ksh disable=SC1090,SC2086
+# vim: syntax=sh expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
 for p in ~/.shrc.d/[0-9]-*; do
   [[ -f $p ]] && source $p; done
