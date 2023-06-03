@@ -1,4 +1,9 @@
-## The gist
+- [About](#about)
+    - [Setup](#setup)
+    - [Bootstrapping](#bootstrapping)
+- [License](#license)
+
+## About
 
 This repository contains my current MirBSD shell
 (mksh) configuration files, structured in such a
@@ -21,7 +26,7 @@ operating-system, place files in host/`$(uname -s)`/,
 e.g. `host/Linux/foo-0`. Any corresponding files will
 be loaded upon shell initialization.
 
-## Now what?
+### Setup
 
 Copy `.mkshrc` to your home directory and create a
 symlink to `.kshrc`, whilst ensuring that `~/.shrc.d`
@@ -56,7 +61,7 @@ $ ln -sf .config/mksh/.mkshrc .mkshrc
 $ ln -sf .config/mksh/.mkshrc .kshrc
 ```
 
-## Bootstrapping
+### Bootstrapping
 
 If, for some reason, you are not able to access
 this repository, the setup can be bootstrapped
