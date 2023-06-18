@@ -9,14 +9,16 @@ start_ssh_agent ()
   if [[ $(command -v ssh-agent) ]] && \
       [[ $- = *i* ]]; then
     auth_socket=~/.ssh/ssh-agent-info
-    # If ssh-agent appears to be an already
-    # running process, point towards our auth
-    # socket; instead, start up a new agent.
-    if [[ -n $(pgrep ssh-agent) ]]; then
-      export SSH_AUTH_SOCK=$auth_socket
-    else
-      [[ -S $auth_socket ]] && rm -f $auth_socket
+    # If we do not have an active ssh-agent
+    # socket, create one and start up a new
+    # agent pointing towards it.
+    if [[ ! -S $auth_socket ]]; then
       eval $(ssh-agent -a $auth_socket) >/dev/null 2>&1
+    # Otherwise, check for an already running
+    # ssh-agent and similarly point at the
+    # existing socket.
+    elif [[ -n $(pgrep ssh-agent) ]]; then
+      export SSH_AUTH_SOCK=$auth_socket
     fi
     unset auth_socket
   fi
