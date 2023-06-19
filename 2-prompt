@@ -1,18 +1,36 @@
 # shellcheck shell=ksh disable=SC2086
 # vim: syntax=sh expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
-BLUE="\033[34m"
-RESET="\033[00m"
+# Initialize global colors for prompt and varying functions.
+# Respect the NO_COLOR enviroment variable to optionally
+# disable prompt colors.
+#
+# See: http://no-color.org
+init_colors ()
+{
+  if [[ -z $NO_COLOR ]]; then
+    RESET="\033[00m"
+    red="\033[31m"
+    green="\033[32m"
+    yellow="\033[33m"
+    blue="\033[34m"
+    magenta="\033[35m"
+    cyan="\033[36m"
+    white="\033[37m"
+    # Change this value to any of the above colors to
+    # reflect the accent used in the prompt.
+    ACCENT=$yellow
+  else
+    unset RESET red green yellow blue magenta cyan white ACCENT
+  fi
+}
 
-TC_BLUE=$(print -e $BLUE)
-TC_RESET=$(print -e $RESET)
-
-# Display a welcoming message upon user login.
-# Will show the current phase of the moon and
-# logged in users if running from an active
-# SSH session.
+init_colors
+# Display a welcoming message upon user login.  Will show
+# the current phase of the moon and logged in users if
+# running from an active SSH session.
 if [[ -n $SSH_TTY ]]; then
-  print -e "Welcome back, $BLUE$USER$RESET\n"
+  print -e "Welcome back, $ACCENT$USER$RESET\n"
   [[ $(command -v phoon) ]] && phoon -l 7; print
   w; print
 else
@@ -21,10 +39,9 @@ fi
 
 clean_pwd ()
 {
-  # On various *BSD and UNIX-like systems /home
-  # is often a symbolic link to /usr/home.  Check
-  # whether that is the case, and echo the tidle
-  # accordingly.
+  # On various *BSD and UNIX-like systems /home is often a
+  # symbolic link to /usr/home.  Check whether that is the
+  # case, and echo the tidle accordingly.
   h=$HOME
   [[ -h /home ]] && h=/usr$HOME
   if [[ $PWD = "$HOME" ]] || \
@@ -43,25 +60,27 @@ ssh_symb ()
 
 git_info ()
 {
+  init_colors
   command -v git >/dev/null 2>&1 || return
   branch=$(git branch --show-current 2>/dev/null)
   if [[ -n $branch ]]; then
     changes=$(git status --porcelain 2>/dev/null | awk '{print $1}' | sort -u)
     if [[ -n $changes ]]; then
       bits=""
-      # Do not expand file name patterns.  This is important
-      # because untracked files are marked as '??', so disable
-      # file-globbing until we are finished parsing any status
-      # changes in the git repository.
+      # Do not expand file name patterns.  This is
+      # important because untracked files are marked as
+      # '??', so disable file-globbing until we are
+      # finished parsing any status changes in the git
+      # repository.
       set -f
       for p in $changes; do
         case $p in
           A) bits+='+' ;;
           D) bits+='-' ;;
-          # Annoying hack.  In ksh93 '!' is a reserved keyword
-          # for the process id or pool name and job number of
-          # the last background command.  This can be escaped
-          # by prepending another '!'.
+          # Annoying hack.  In ksh93 '!' is a reserved
+          # keyword for the process id or pool name and
+          # job number of the last background command.
+          # This can be escaped by prepending another '!'.
           M) case $KSH_VERSION in
               (*MIRBSD*) bits+='!' ;;
               (*) bits+='!!' ;;
@@ -78,10 +97,14 @@ git_info ()
     # the MirBSD (mksh) shell that is otherwise unsupported
     # in ksh93 and friends.
     [[ $KSH_VERSION = *MIRBSD* ]] && sep="\u00B7" || sep="-"
-    print -e "<$BLUE$branch$RESET$sep$sha> "
+    print -e "<$ACCENT$branch$RESET$sep$sha> "
   fi
 }
 
-export PS1="\$(ssh_symb)$TC_BLUE\$(hostname -s)$TC_RESET:\$(clean_pwd) \$(git_info)\$(print -e '\n%') "
+host()
+{
+  init_colors
+  print -e "$ACCENT$(hostname -s)$RESET"
+}
 
-unset BLUE RESET TC_BLUE TC_RESET
+export PS1="\$(ssh_symb)\$(host):\$(clean_pwd) \$(git_info)\$(print -e '\n%') "
