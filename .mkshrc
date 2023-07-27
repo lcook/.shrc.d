@@ -1,6 +1,7 @@
-# shellcheck shell=ksh disable=SC1090,SC2086
+# shellcheck shell=ksh
 # vim: syntax=sh et ts=2 sw=2 sts=2
 
 for p in ~/.shrc.d/[0-9]-*; do
-  [[ -f $p ]] && source $p; done
+  # shellcheck source=/dev/null
+  [[ -f $p ]] && source "$p"; done
 unset p
