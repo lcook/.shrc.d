@@ -1,6 +1,7 @@
-# shellcheck shell=ksh disable=SC1090
+# shellcheck shell=ksh
 # vim: syntax=sh et ts=2 sw=2 sts=2
 
+# shellcheck source=/dev/null
 source ~/.shrc.d/.envrc
 export HISTFILE=~/.shrc.d/.history
 export HISTSIZE=20000

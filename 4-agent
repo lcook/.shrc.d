@@ -1,4 +1,4 @@
-# shellcheck shell=ksh disable=SC2046
+# shellcheck shell=ksh
 # vim: syntax=sh et ts=2 sw=2 sts=2
 
 start_ssh_agent ()
@@ -13,7 +13,7 @@ start_ssh_agent ()
     # socket, create one and start up a new
     # agent pointing towards it.
     if [[ ! -S $auth_socket ]]; then
-      eval $(ssh-agent -a $auth_socket) >/dev/null 2>&1
+      eval "$(ssh-agent -a $auth_socket)" >/dev/null 2>&1
     # Otherwise, check for an already running
     # ssh-agent and similarly point at the
     # existing socket.

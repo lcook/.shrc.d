@@ -1,4 +1,4 @@
-# shellcheck shell=ksh disable=SC1090,SC2086,SC2231
+# shellcheck shell=ksh
 # vim: syntax=sh et ts=2 sw=2 sts=2
 
 # Load operating-system specific
@@ -6,9 +6,10 @@
 load_host_rc ()
 {
   rcdir=~/.shrc.d/host/$(uname -s)
-  if [ -d $rcdir ]; then
-    for p in $rcdir/*; do
-      [[ -f $p ]] && source $p; done
+  if [ -d "$rcdir" ]; then
+    for p in "$rcdir"/*; do
+      # shellcheck source=/dev/null
+      [[ -f "$p" ]] && source "$p"; done
   fi
   unset rcdir
 }; load_host_rc

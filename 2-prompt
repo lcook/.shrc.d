@@ -1,4 +1,4 @@
-# shellcheck shell=ksh disable=SC2086
+# shellcheck shell=ksh disable=SC2034
 # vim: syntax=sh et ts=2 sw=2 sts=2
 
 # Initialize global colors for prompt and varying functions.
@@ -47,7 +47,7 @@ clean_pwd ()
   if [[ $PWD = "$HOME" ]] || \
     [[ $PWD = "$h" ]]; then print '~';
   else
-    print $PWD | awk -F/ '{print $NF}'
+    print "$PWD" | awk -F/ '{print $NF}'
   fi
 }
 
