@@ -1,5 +1,6 @@
 - [About](#about)
     - [Setup](#setup)
+     - [Oneliner](#oneliner)
     - [Bootstrapping](#bootstrapping)
 - [License](#license)
 
@@ -59,6 +60,12 @@ $ cd ~ || return
 $ ln -sf .config/mksh .shrc.d
 $ ln -sf .config/mksh/.mkshrc .mkshrc
 $ ln -sf .config/mksh/.mkshrc .kshrc
+```
+
+#### Oneliner
+
+```shell
+$ git clone git@github.com:lcook/.shrc.d.git ~/.shrc.d;cd ~ && for f in .mkshrc .kshrc;do ln -sf .shrc.d/.mkshrc $f;done||return
 ```
 
 ### Bootstrapping
