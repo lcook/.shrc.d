@@ -1,6 +1,6 @@
 - [About](#about)
     - [Setup](#setup)
-     - [Oneliner](#oneliner)
+      - [Oneliner](#oneliner)
     - [Bootstrapping](#bootstrapping)
 - [License](#license)
 
@@ -64,8 +64,10 @@ $ ln -sf .config/mksh/.mkshrc .kshrc
 
 #### Oneliner
 
+Quick n' dirty oneliner to skip all the noise.
+
 ```shell
-$ git clone git@github.com:lcook/.shrc.d.git ~/.shrc.d;cd ~ && for f in .mkshrc .kshrc;do ln -sf .shrc.d/.mkshrc $f;done||return
+git clone git@github.com:lcook/.shrc.d.git ~/.shrc.d;cd ~ && for f in .mkshrc .kshrc;do ln -sf .shrc.d/.mkshrc $f;done||return
 ```
 
 ### Bootstrapping
