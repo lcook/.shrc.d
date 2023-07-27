@@ -1,5 +1,5 @@
 # shellcheck shell=ksh disable=SC2046
-# vim: syntax=sh expandtab tabstop=2 shiftwidth=2 softtabstop=2
+# vim: syntax=sh et ts=2 sw=2 sts=2
 
 start_ssh_agent ()
 {
