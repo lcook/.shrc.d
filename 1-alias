@@ -1,14 +1,23 @@
 # shellcheck shell=ksh
 # vim: syntax=sh et ts=2 sw=2 sts=2
 
-alias \
-  ls="ls -h --color=auto"    \
-  ll="ls -l"                 \
-  la="ls -A"                 \
-  lm="la --color=none |more"
+LS_COLOR=auto
+GREP_COLOR=auto
+if [[ -n $NO_COLOR ]]; then
+  LS_COLOR=none
+  GREP_COLOR=never
+fi
 
 alias \
-  grep="grep --color=auto"
+  ls="ls -h --color=$LS_COLOR"  \
+  ll="ls -l"                    \
+  la="ls -A"                    \
+  lm="la --color=none | more"
+
+alias \
+  grep="grep --color=$GREP_COLOR"
+
+unset LS_COLOR GREP_COLOR
 
 if [[ $(command -v git) ]]; then
   alias \

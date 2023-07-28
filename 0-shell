@@ -6,6 +6,8 @@ source ~/.shrc.d/.envrc
 export HISTFILE=~/.shrc.d/.history
 export HISTSIZE=20000
 export TERM=xterm-256color
+#export NO_COLOR=1 # Disable prompt coloring and terminal applications
+                   # that respect NO_COLOR; http://no-color.org.
 
 # Enable UTF-8 support for the MirBSD
 # shell (mksh), not supported in ksh93.
