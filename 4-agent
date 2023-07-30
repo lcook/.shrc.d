@@ -8,12 +8,12 @@ start_ssh_agent ()
   # is actually installed on the host.
   if [[ $(command -v ssh-agent) ]] && \
       [[ $- = *i* ]]; then
-    auth_socket=~/.ssh/ssh-agent-info
+    auth_socket=~/.ssh/agent.$(hostname -s).sock
     # If we do not have an active ssh-agent
     # socket, create one and start up a new
     # agent pointing towards it.
     if [[ ! -S $auth_socket ]]; then
-      eval "$(ssh-agent -a $auth_socket)" >/dev/null 2>&1
+      eval "$(ssh-agent -a "$auth_socket" -t 28800)" >/dev/null 2>&1
     # Otherwise, check for an already running
     # ssh-agent and similarly point at the
     # existing socket.
