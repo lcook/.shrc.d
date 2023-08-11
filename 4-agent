@@ -13,7 +13,12 @@ start_ssh_agent ()
     # socket, create one and start up a new
     # agent pointing towards it.
     if [[ ! -S $auth_socket ]]; then
-      eval "$(ssh-agent -a "$auth_socket" -t 28800)" >/dev/null 2>&1
+      # Remove the socket should an error occur,
+      # preventing future agents from connecting
+      # to the in-use socket bind address.
+      if ! eval "$(ssh-agent -a "$auth_socket" -t 28800)" >/dev/null 2>&1; then
+        rm -f "$auth_socket"
+      fi
     # Otherwise, check for an already running
     # ssh-agent and similarly point at the
     # existing socket.
