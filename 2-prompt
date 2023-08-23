@@ -6,6 +6,7 @@
 # disable prompt colors.
 #
 # See: http://no-color.org
+_color_index=$(jot -r 1 1 7)
 init_colors ()
 {
   if [[ -z $NO_COLOR ]]; then
@@ -19,9 +20,13 @@ init_colors ()
     white="\033[37m"
     # Change this value to any of the above colors to
     # reflect the accent used in the prompt.
-    ACCENT=$yellow
+    ACCENT=random
+    if [[ $ACCENT = random ]]; then
+      set -- "$red" "$green" "$yellow" "$blue" "$magenta" "$cyan" "$white"
+      ACCENT=$(eval echo "\${$_color_index}")
+    fi
   else
-    unset RESET red green yellow blue magenta cyan white ACCENT
+    unset RESET red green yellow blue magenta cyan white ACCENT _color_index
   fi
 }
 
