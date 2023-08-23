@@ -42,6 +42,11 @@ clean_pwd ()
   # On various *BSD and UNIX-like systems /home is often a
   # symbolic link to /usr/home.  Check whether that is the
   # case, and echo the tidle accordingly.
+  #
+  # Note: Default behaviour changed on FreeBSD[0].  This
+  # check can be removed in the distant future.
+  #
+  # [0] https://reviews.freebsd.org/D40086
   h=$HOME
   [[ -h /home ]] && h=/usr$HOME
   if [[ $PWD = "$HOME" ]] || \
