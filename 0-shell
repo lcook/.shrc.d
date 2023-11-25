@@ -16,7 +16,7 @@ if [[ $KSH_VERSION = *MIRBSD* ]]; then
 fi
 set -o emacs
 
-for p in ~/bin ~/.local/bin ~/.local/script; do
+for p in ~/bin ~/.local/bin ~/.local/script ~/.script; do
   if [[ ! -d $p ]]; then
     continue
   fi

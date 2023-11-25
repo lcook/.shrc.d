@@ -1,6 +1,10 @@
 # shellcheck shell=ksh
 # vim: syntax=sh et ts=2 sw=2 sts=2
 
+if [[ $(command -v portsync) ]]; then
+  alias psync="portsync"
+fi
+
 if [[ $(command -v pkg) ]]; then
   alias \
     pkga="pkg query -e %a=0 %o"           \
