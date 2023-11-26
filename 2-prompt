@@ -36,10 +36,10 @@ init_colors
 # running from an active SSH session.
 if [[ -n $SSH_TTY ]]; then
   print -e "Welcome back, $ACCENT$USER$RESET\n"
-  [[ $(command -v phoon) ]] && phoon -l 7; print
+  [[ $(command -v phoon) ]] && phoon -l 7 && print
   w; print
 else
-  [[ $(command -v phoon) ]] && phoon -l 7; print
+  [[ $(command -v phoon) ]] && phoon -l 7 && print
 fi
 
 clean_pwd ()
