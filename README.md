@@ -67,7 +67,7 @@ $ ln -sf .config/mksh/.mkshrc .kshrc
 Quick n' dirty oneliner to skip all the noise.
 
 ```shell
-git clone https://github.com/lcook/.shrc.d ~/.shrc.d;cd ~ && for f in .mkshrc .kshrc;do ln -sf .shrc.d/.mkshrc $f;done||return
+git clone https://github.com/lcook/.shrc.d ~/.shrc.d;cd ~ && for f in .mkshrc .kshrc .shrc;do ln -sf .shrc.d/.mkshrc $f;done||return
 ```
 
 ## License
