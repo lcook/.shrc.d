@@ -3,6 +3,11 @@
 
 start_ssh_agent ()
 {
+  # Bail out early if the ssh directory
+  # is not found.
+  if [ ! -d ~/.ssh ]; then
+    return
+  fi
   # Determine whether we are inside of an
   # interactive shell and that ssh-agent
   # is actually installed on the host.
