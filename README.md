@@ -70,36 +70,6 @@ Quick n' dirty oneliner to skip all the noise.
 git clone https://github.com/lcook/.shrc.d ~/.shrc.d;cd ~ && for f in .mkshrc .kshrc;do ln -sf .shrc.d/.mkshrc $f;done||return
 ```
 
-### Bootstrapping
-
-If, for some reason, you are not able to access
-this repository, the setup can be bootstrapped
-via an externally provided tar archive, graciously
-hosted on freefall (my FreeBSD homepage).
-
-```shell
-$ url="https://people.freebsd.org/~lcook/shrc.tar.gz"
-```
-
-fetch:
-```shell
-$ fetch -q -o /dev/stdout $url | tar xfv - -C ~
-```
-
-curl:
-```shell
-$ curl -s -o /dev/stdout $url | tar xfv - -C ~
-```
-
-wget:
-```shell
-$ wget -q -O- $url | tar xfv - -C ~
-```
-
-This is entirely for personal usage and does not
-include any `.local` files for less baggage. Not
-generally recommended.
-
 ## License
 
 [BSD 2-Clause](LICENSE)
